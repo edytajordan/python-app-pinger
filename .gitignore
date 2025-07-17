@@ -1,0 +1,22 @@
+# Ignore Python-related files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+*.env
+.env
+
+# macOS system files
+.DS_Store
+
+# VSCode and IDE settings
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# GitHub workflows cache
+.github/workflows/*.log

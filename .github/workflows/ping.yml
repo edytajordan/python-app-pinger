@@ -1,0 +1,25 @@
+name: Conditional Render Pinger
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"  # Every 5 minutes UTC
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get EST time and Ping if within 5 AM–11 PM
+        run: |
+          sudo apt-get update && sudo apt-get install -y tzdata
+          export TZ=America/New_York
+          NOW=$(date +%H)
+          echo "Current EST hour: $NOW"
+
+          if [ $NOW -ge 5 ] && [ $NOW -lt 23 ]; then
+            DELAY=$((RANDOM % 300 + 300))  # 5–10 min delay
+            echo "Within allowed window. Sleeping $DELAYs, then pinging..."
+            sleep $DELAY
+            curl -s https://snakepit-python-portfolio.onrender.com/healthz
+          else
+            echo "Outside allowed hours (5 AM–11 PM EST). Skipping ping."
+          fi
