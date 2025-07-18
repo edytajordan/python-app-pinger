@@ -12,18 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: Get EST time and Ping if within 5 AM–11 PM
+      - name: Ping Render App (24/7)
         run: |
-          sudo apt-get update && sudo apt-get install -y tzdata
-          export TZ=America/New_York
-          NOW=$(date +%H)
-          echo "Current EST hour: $NOW"
-
-          if [ $NOW -ge 5 ] && [ $NOW -lt 23 ]; then
-            DELAY=$((RANDOM % 300 + 300))  # 5–10 min delay
-            echo "Within allowed window. Sleeping $DELAYs, then pinging..."
-            sleep $DELAY
-            curl -s https://snakepit-python-portfolio.onrender.com/healthz
-          else
-            echo "Outside allowed hours (5 AM–11 PM EST). Skipping ping."
-          fi
+          echo "Run started at: $(date)"
+          DELAY=$((RANDOM % 300 + 300))  # 5–10 min delay
+          echo "Sleeping $DELAYs, then pinging..."
+          sleep $DELAY
+          curl -s https://snakepit-python-portfolio.onrender.com/healthz
