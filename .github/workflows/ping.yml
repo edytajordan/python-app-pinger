@@ -10,12 +10,12 @@ on:
 jobs:
   ping:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
     steps:
-      - name: Ping Render App (24/7)
+      - name: Ping Render App (24/7 with 2-4 min delay)
         run: |
           echo "Run started at: $(date)"
-          DELAY=$((RANDOM % 300 + 300))  # 5–10 min delay
+          DELAY=$((RANDOM % 120 + 120))
           echo "Sleeping $DELAYs, then pinging..."
           sleep $DELAY
           curl -s https://snakepit-python-portfolio.onrender.com/healthz
