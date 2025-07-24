@@ -3,9 +3,8 @@
 This repo uses **GitHub Actions** to keep a Flask app hosted on **Render.com** awake during specific hours (5 AM – 11 PM EST).  
 It does this by:
 
-- Running every 5 minutes
-- Waiting a random 5–10 minutes
-- Only pinging during the allowed time window
+- Running every 30 minutes
+- Waiting a random 2-5 minutes
 - Sending a `GET` request to your app’s `/healthz` endpoint
 
 ---
